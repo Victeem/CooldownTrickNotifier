@@ -1,0 +1,6 @@
+{
+  "ctn.midnightconfig.title": "Cooldown Trick Notifier",
+  "ctn.midnightconfig.enum.ForWhoPlaySound.SELF": "Self only",
+  "ctn.midnightconfig.enum.ForWhoPlaySound.ALL": "All players",
+  "ctn.midnightconfig.enum.ForWhoPlaySound.OTHERS": "Other players only"
+}

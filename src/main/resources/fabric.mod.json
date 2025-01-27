@@ -1,0 +1,36 @@
+{
+	"schemaVersion": 1,
+	"id": "ctn",
+	"version": "${version}",
+	"name": "Cooldown Trick Notifier",
+	"description": "PvP mod that plays a sound when you successfully cooldown trick.",
+	"authors": [
+		"Victeem"
+	],
+	"contact": {
+		"sources": "https://github.com/Victim726/CooldownTickNotifier"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/ctn/icon.png",
+	"environment": "client",
+	"entrypoints": {
+		"client": [
+			"gay.plat.ctn.CooldownTrickNotifier"
+		]
+	},
+	"mixins": [
+		{
+			"config": "ctn.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.16.9",
+		"minecraft": ">=1.21.1",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
