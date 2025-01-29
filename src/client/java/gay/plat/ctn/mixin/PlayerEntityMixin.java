@@ -24,7 +24,7 @@ public abstract class PlayerEntityMixin{
 	@Inject(at = @At("HEAD"), method = "tick")
 	private void onTick(CallbackInfo info) {
 		final PlayerEntity player = (PlayerEntity)(Object)this;
-		if (CooldownTrickNotifierConfig.shouldPlaySound(player))
+		if (player.getWorld().isClient() && CooldownTrickNotifierConfig.shouldPlaySound(player))
 			prevAttributeModifiersComponent = player.getMainHandStack().getOrDefault(DataComponentTypes.ATTRIBUTE_MODIFIERS, AttributeModifiersComponent.DEFAULT);
 	}
 

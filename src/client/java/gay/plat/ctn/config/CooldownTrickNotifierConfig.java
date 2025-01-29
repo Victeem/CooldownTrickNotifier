@@ -28,6 +28,7 @@ public class CooldownTrickNotifierConfig extends MidnightConfig {
     }
 
     public static boolean shouldPlaySoundForPlayer(UUID uuid) {
+        if (MinecraftClient.getInstance().player == null) {return false;}
         UUID clientuuid = MinecraftClient.getInstance().player.getUuid();
         switch (forWhoPlaySound) {
             case SELF -> {
