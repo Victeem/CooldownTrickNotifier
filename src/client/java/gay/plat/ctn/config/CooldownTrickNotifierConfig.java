@@ -15,22 +15,22 @@ public class CooldownTrickNotifierConfig extends MidnightConfig {
     @Entry(category = COOLDOWN_TRICK_NOTIFIER, name = "Volume", isSlider = true, min = 0F, max = 1F, precision = 20)
     public static float volume = 1F;
 
-    @Entry(category = COOLDOWN_TRICK_NOTIFIER, name = "Pitch", isSlider = true, min = 0F, max = 1F, precision = 20)
+    @Entry(category = COOLDOWN_TRICK_NOTIFIER, name = "Pitch", isSlider = true, min = 0.5F, max = 2F, precision = 20)
     public static float pitch = 1F;
 
-    @Entry(category = COOLDOWN_TRICK_NOTIFIER, name = "Sound")
+    @Entry(category = COOLDOWN_TRICK_NOTIFIER, name = "Sound ID")
     public static String soundID = "entity.arrow.hit_player";
 
-    @Entry(category = COOLDOWN_TRICK_NOTIFIER, name = "Sound will play when who cooldowntricks")
-    public static ForWhoPlaySound forWhoPlaySound = ForWhoPlaySound.SELF;
-    public enum ForWhoPlaySound {
+    @Entry(category = COOLDOWN_TRICK_NOTIFIER, name = "Play Mode")
+    public static PlayMode playMode = PlayMode.SELF;
+    public enum PlayMode {
         SELF, ALL, OTHERS
     }
 
     public static boolean shouldPlaySoundForPlayer(UUID uuid) {
         if (MinecraftClient.getInstance().player == null) {return false;}
         UUID clientuuid = MinecraftClient.getInstance().player.getUuid();
-        switch (forWhoPlaySound) {
+        switch (playMode) {
             case SELF -> {
                 return uuid.equals(clientuuid);
             }
