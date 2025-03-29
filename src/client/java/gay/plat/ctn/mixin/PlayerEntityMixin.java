@@ -1,6 +1,7 @@
 package gay.plat.ctn.mixin;
 
 import gay.plat.ctn.config.CooldownTrickNotifierConfig;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.entity.Entity;
@@ -34,10 +35,11 @@ public abstract class PlayerEntityMixin{
 		if (player.getWorld().isClient() && CooldownTrickNotifierConfig.shouldPlaySound(player)) {
 			AttributeModifiersComponent attributeModifiersComponent = player.getMainHandStack().getOrDefault(DataComponentTypes.ATTRIBUTE_MODIFIERS, AttributeModifiersComponent.DEFAULT);
 			if (attributeModifiersComponent != prevAttributeModifiersComponent) {
+				assert MinecraftClient.getInstance().player != null;
 				Optional.ofNullable(CooldownTrickNotifierConfig.soundID)
 					.map(Identifier::tryParse)
 					.map(Registries.SOUND_EVENT::get)
-					.ifPresent(sound -> player.playSound(sound, CooldownTrickNotifierConfig.volume, CooldownTrickNotifierConfig.pitch));
+					.ifPresent(sound -> MinecraftClient.getInstance().player.playSound(sound, CooldownTrickNotifierConfig.volume, CooldownTrickNotifierConfig.pitch));
 			}
 		}
 	}
