@@ -7,24 +7,24 @@ import net.minecraft.entity.player.PlayerEntity;
 import java.util.UUID;
 
 public class CooldownTrickNotifierConfig extends MidnightConfig {
-    public static final String COOLDOWN_TRICK_NOTIFIER = "cooldown_trick_notifier";
+    public static final String CTN = "ctn";
 
-    @Entry(category = COOLDOWN_TRICK_NOTIFIER, name = "Mod Enabled")
+    @Entry(category = CTN, name = "Mod Enabled")
     public static boolean isEnabled = true;
 
-    @Entry(category = COOLDOWN_TRICK_NOTIFIER, name = "Volume", isSlider = true, min = 0F, max = 1F, precision = 20)
+    @Entry(category = CTN, name = "Volume", isSlider = true, min = 0F, max = 1F, precision = 20)
     public static float volume = 1F;
 
-    @Entry(category = COOLDOWN_TRICK_NOTIFIER, name = "Pitch", isSlider = true, min = 0.5F, max = 2F, precision = 20)
+    @Entry(category = CTN, name = "Pitch", isSlider = true, min = 0.5F, max = 2F, precision = 20)
     public static float pitch = 1F;
 
-    @Entry(category = COOLDOWN_TRICK_NOTIFIER, name = "Sound ID")
+    @Entry(category = CTN, name = "Sound ID")
     public static String soundID = "entity.arrow.hit_player";
 
-    @Entry(category = COOLDOWN_TRICK_NOTIFIER, name = "Play Mode")
+    @Entry(category = CTN, name = "Play Mode")
     public static PlayMode playMode = PlayMode.SELF;
     public enum PlayMode {
-        SELF, ALL, OTHERS
+        SELF, @SuppressWarnings("unused") ALL, OTHERS
     }
 
     public static boolean shouldPlaySoundForPlayer(UUID uuid) {
@@ -44,6 +44,7 @@ public class CooldownTrickNotifierConfig extends MidnightConfig {
     }
 
     public static boolean shouldPlaySound(PlayerEntity player) {
+        if (player == null) return false;
         return isEnabled && CooldownTrickNotifierConfig.shouldPlaySoundForPlayer(player.getUuid());
     }
 }

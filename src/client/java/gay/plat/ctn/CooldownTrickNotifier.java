@@ -12,7 +12,7 @@ public class CooldownTrickNotifier implements ClientModInitializer {
 
 	@Override
 	public void onInitializeClient() {
-		LOGGER.info("ClientInit");
+		LOGGER.info("ModInit");
 		MidnightConfig.init(MODID, CooldownTrickNotifierConfig.class);
 	}
 }
