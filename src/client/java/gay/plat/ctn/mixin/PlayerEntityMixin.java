@@ -36,7 +36,7 @@ public abstract class PlayerEntityMixin{
 		if (player.getWorld().isClient() && CooldownTrickNotifierConfig.shouldPlaySound(player)) {
 			AttributeModifiersComponent attributeModifiersComponent = player.getMainHandStack().getOrDefault(DataComponentTypes.ATTRIBUTE_MODIFIERS, AttributeModifiersComponent.DEFAULT);
 			if (attributeModifiersComponent != prevAttributeModifiersComponent) {
-				CooldownTrickCallback.EVENT.invoker().interact(player, target);
+				CooldownTrickCallback.EVENT.invoker().interact(player, target, player.getWorld(), player.getMainHandStack());
 
 				assert MinecraftClient.getInstance().player != null;
 				Optional.ofNullable(CooldownTrickNotifierConfig.soundID)
