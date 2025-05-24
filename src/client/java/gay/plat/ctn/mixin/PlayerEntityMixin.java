@@ -21,7 +21,7 @@ import java.util.Optional;
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin{
 	@Unique
-	AttributeModifiersComponent prevAttributeModifiersComponent = new AttributeModifiersComponent(new ArrayList<>(),false);
+	AttributeModifiersComponent prevAttributeModifiersComponent = new AttributeModifiersComponent(new ArrayList<>());
 
 	@Inject(at = @At("HEAD"), method = "tick")
 	private void onTick(CallbackInfo info) {
