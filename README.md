@@ -10,6 +10,6 @@ Config Options:
 - Pitch
 - Sound - An ID for the sound to played.
 - Play Mode - When to detect cooldown tricking and play a sound.
-  - Self only is the default setting and results in the sound playing only when you successfully cooldown tricks.
-  - All players results in the sound playing when anyone successfully cooldown tricks.
-  - Others players only results in the sound playing only when other players successfully cooldown tricks.
+  - *Self only* is the default setting and results in the sound playing only when you successfully cooldown tricks.
+  - *All players* results in the sound playing when anyone successfully cooldown tricks.
+  - *Other players* only results in the sound playing only when other players successfully cooldown tricks.
