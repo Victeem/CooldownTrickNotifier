@@ -2,8 +2,6 @@
  
 ## This is a simple client side mod that plays a sound when you successfully cooldown trick/attribute swap.
 
-**MidnightLib is required to configure this mod.**
-
 Config Options:
 - Mod Enabled
 - Volume
