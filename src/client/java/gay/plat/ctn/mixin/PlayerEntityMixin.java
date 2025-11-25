@@ -1,49 +1,42 @@
 package gay.plat.ctn.mixin;
 
-import gay.plat.ctn.config.CooldownTrickNotifierConfig;
-import gay.plat.ctn.events.CooldownTrickCallback;
+import gay.plat.ctn.CooldownTrickNotifier;
+import gay.plat.ctn.config.CtnConfig;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
+import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.ArrayList;
-import java.util.Optional;
-
 @Mixin(PlayerEntity.class)
-public abstract class PlayerEntityMixin{
-	@Unique
-	AttributeModifiersComponent prevAttributeModifiersComponent = new AttributeModifiersComponent(new ArrayList<>());
+public abstract class PlayerEntityMixin extends LivingEntity {
+    protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
+        super(entityType, world);
+    }
 
-	@Inject(at = @At("HEAD"), method = "tick")
-	private void onTick(CallbackInfo info) {
-		final PlayerEntity player = (PlayerEntity)(Object)this;
-		if (player.getWorld().isClient() && CooldownTrickNotifierConfig.shouldPlaySound(player))
-			prevAttributeModifiersComponent = player.getMainHandStack().getOrDefault(DataComponentTypes.ATTRIBUTE_MODIFIERS, AttributeModifiersComponent.DEFAULT);
-	}
+    @Unique
+    private ItemStack prevMainHandStack = ItemStack.EMPTY;
 
-	@Inject(at = @At("HEAD"), method = "attack")
-	private void onAttack(Entity target, CallbackInfo info) {
-		final PlayerEntity player = (PlayerEntity)(Object)this;
-		if (player.getWorld().isClient() && CooldownTrickNotifierConfig.shouldPlaySound(player)) {
-			AttributeModifiersComponent attributeModifiersComponent = player.getMainHandStack().getOrDefault(DataComponentTypes.ATTRIBUTE_MODIFIERS, AttributeModifiersComponent.DEFAULT);
-			if (attributeModifiersComponent != prevAttributeModifiersComponent) {
-				CooldownTrickCallback.EVENT.invoker().interact(player, target, player.getWorld(), player.getMainHandStack());
+    @Inject(at = @At("HEAD"), method = "tick")
+    private void onTick(CallbackInfo info) {
+        prevMainHandStack = getMainHandStack();
+    }
 
-				assert MinecraftClient.getInstance().player != null;
-				Optional.ofNullable(CooldownTrickNotifierConfig.soundID)
-					.map(Identifier::tryParse)
-					.map(Registries.SOUND_EVENT::get)
-					.ifPresent(sound -> MinecraftClient.getInstance().player.playSound(sound, CooldownTrickNotifierConfig.volume, CooldownTrickNotifierConfig.pitch));
-			}
-		}
-	}
+    @Inject(at = @At("HEAD"), method = "attack")
+    private void onAttack(Entity target, CallbackInfo info) {
+        final CtnConfig config = CooldownTrickNotifier.configManager.getConfig();
+        if (config.shouldPlaySound((PlayerEntity)(Object)this) && !ItemStack.areEqual(prevMainHandStack, getMainHandStack())) {
+            assert MinecraftClient.getInstance().player != null;
+            MinecraftClient.getInstance().player.playSound(Registries.SOUND_EVENT.get(Identifier.tryParse(config.sound)), config.volume, config.pitch);
+        }
+    }
 }

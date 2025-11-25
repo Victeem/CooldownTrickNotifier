@@ -1,6 +1,11 @@
 {
-  "ctn.midnightconfig.title": "Cooldown Trick Notifier",
-  "ctn.midnightconfig.enum.PlayMode.SELF": "Self only",
-  "ctn.midnightconfig.enum.PlayMode.ALL": "All players",
-  "ctn.midnightconfig.enum.PlayMode.OTHERS": "Other players only"
+  "ctn.config.title": "Cooldown Trick Notifier Config",
+  "ctn.config.enabled": "Enabled",
+  "ctn.config.volume": "Volume",
+  "ctn.config.pitch": "Pitch",
+  "ctn.config.sound": "Sound",
+  "ctn.config.playFor": "For whom the sound is played",
+  "ctn.config.playFor: SELF": "Self only",
+  "ctn.config.playFor: ALL": "All players",
+  "ctn.config.playFor: OTHERS": "Other players only"
 }
