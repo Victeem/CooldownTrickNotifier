@@ -28,7 +28,7 @@
 		}
 	],
 	"depends": {
-    	"minecraft": "~1.21",
+    	"minecraft": ">=1.21",
 		"fabricloader": ">=0.18.2",
 		"ukulib": "^1.4.0"
 	}
