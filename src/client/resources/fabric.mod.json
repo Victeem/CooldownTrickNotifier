@@ -12,7 +12,7 @@
 	},
 	"license": "MIT",
 	"icon": "assets/ctn/icon.png",
-	"environment": "*",
+	"environment": "client",
 	"entrypoints": {
 		"client": [
 			"gay.plat.ctn.CooldownTrickNotifier"
@@ -28,13 +28,8 @@
 		}
 	],
 	"depends": {
-		"fabricloader": ">=0.18.1",
-		"minecraft": "~1.21.1",
-		"java": ">=21",
-		"fabric-api": "*",
+    	"minecraft": "~1.21",
+		"fabricloader": ">=0.18.2",
 		"ukulib": "^1.4.1"
-	},
-	"suggests": {
-		"another-mod": "*"
 	}
 }
