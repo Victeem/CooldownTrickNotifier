@@ -5,7 +5,7 @@
   "ctn.config.pitch": "Pitch",
   "ctn.config.sound": "Sound",
   "ctn.config.playFor": "For whom the sound is played",
-  "ctn.config.playFor: SELF": "Self only",
-  "ctn.config.playFor: ALL": "All players",
-  "ctn.config.playFor: OTHERS": "Other players only"
+  "ctn.config.playFor.self": "Self only",
+  "ctn.config.playFor.all": "All players",
+  "ctn.config.playFor.others": "Other players only"
 }
