@@ -1,6 +1,7 @@
 package gay.plat.ctn.mixin;
 
 import gay.plat.ctn.CooldownTrickNotifier;
+import gay.plat.ctn.access.PlayerEntityAccessor;
 import gay.plat.ctn.config.CtnConfig;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
@@ -18,13 +19,18 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(PlayerEntity.class)
-public abstract class PlayerEntityMixin extends LivingEntity {
+public abstract class PlayerEntityMixin extends LivingEntity implements PlayerEntityAccessor {
     protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
     }
 
     @Unique
     private ItemStack prevMainHandStack = ItemStack.EMPTY;
+
+    @Override
+    public ItemStack ctn$getPrevMainHandStack() {
+        return prevMainHandStack;
+    }
 
     @Inject(at = @At("HEAD"), method = "tick")
     private void onTick(CallbackInfo info) {
