@@ -3,7 +3,7 @@
   "package": "gay.plat.ctn.mixin",
   "compatibilityLevel": "JAVA_21",
   "client": [
-    "PlayerEntityMixin"
+    "PlayerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

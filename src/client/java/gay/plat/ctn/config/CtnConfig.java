@@ -1,7 +1,7 @@
 package gay.plat.ctn.config;
 
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.entity.player.Player;
 
 import java.io.Serializable;
 
@@ -15,14 +15,14 @@ public class CtnConfig implements Serializable {
         SELF, @SuppressWarnings("unused") ALL, OTHERS
     }
 
-    public boolean shouldPlaySound(PlayerEntity player) {
-        if (!enabled || player == null || MinecraftClient.getInstance().player == null) return false;
+    public boolean shouldPlaySound(Player player) {
+        if (!enabled || player == null || Minecraft.getInstance().player == null) return false;
         switch (playFor) {
             case SELF -> {
-                return player.getUuid().equals(MinecraftClient.getInstance().player.getUuid());
+                return player.getUUID().equals(Minecraft.getInstance().player.getUUID());
             }
             case OTHERS -> {
-                return !player.getUuid().equals(MinecraftClient.getInstance().player.getUuid());
+                return !player.getUUID().equals(Minecraft.getInstance().player.getUUID());
             }
             case null, default -> {
                 return true;
