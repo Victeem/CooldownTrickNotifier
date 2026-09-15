@@ -31,7 +31,7 @@ dependencies {
 	implementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
     // ukulib
-    api("net.uku3lig:ukulib-fabric:${project.ukulib_version}")
+    api "net.uku3lig:ukulib-fabric:${project.ukulib_version}"
 }
 
 processClientResources {

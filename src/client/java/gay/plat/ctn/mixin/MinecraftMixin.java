@@ -21,7 +21,7 @@ public abstract class MinecraftMixin {
     @Nullable
     public LocalPlayer player;
 
-    @Inject(method = "startAttack", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/multiplayer/MultiPlayerGameMode;piercingAttack(Lnet/minecraft/world/item/component/PiercingWeapon;)V"))
+    @Inject(method = "startAttack", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/multiplayer/MultiPlayerGameMode;piercingAttack(Lnet/minecraft/world/item/component/SwingAnimation;Lnet/minecraft/world/item/component/PiercingWeapon;)V"))
     private void onStabAttack(CallbackInfoReturnable<Boolean> cir) {
         final CtnConfig config = CooldownTrickNotifier.configManager.getConfig();
         if (config.shouldPlaySound(player)) {
